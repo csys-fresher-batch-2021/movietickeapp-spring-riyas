@@ -21,7 +21,7 @@
 				<br> <label for="showDate">Enter Show Date :</label> <input
 					type="date" placeholder="ShowDate" id="showDate" name="showDate"
 					required onchange="getShowTimes()"><br />				
-				<div id="showTime"></div>
+				<div id="showTimes"></div>
 				<div id="seatTypes"></div><br/>
 				<button type="submit" class="btn btn-primary">Search</button>
 				<div id="movie"></div>
@@ -78,7 +78,7 @@
 							"value =\""+time+"\" required >" + showHour + ":00 " ;
 					}
 				}
-				document.querySelector("#showTime").innerHTML= content;
+				document.querySelector("#showTimes").innerHTML= content;
 				});
 			}
 			
@@ -106,6 +106,8 @@
 				let i = 0;
 				let role = localStorage.getItem("role");
 				console.log(role);
+				let tickets1 = getBookedTickets();
+				console.log(tickets1);
 				content+="<br/><table class='table table-bordered'>";
 				content+="<thead><tr><th>S.No</th><th>Movie Name</th><th>Actor Name</th><th>Screen</th></tr></thead>";
 				for(let movie of movies){					
@@ -113,8 +115,38 @@
 				}
 				content+="</table>";
 				document.querySelector("#movie").innerHTML= content;
-				});		
+				});	
+				
 			}
+			
+			function getBookedTickets(){
+				
+				let showDate = document.querySelector("#showDate").value;
+				let showTime = document.querySelector("#showTime").value;
+				let seatType = document.querySelector("#seatType").value;
+				let ticket={
+					    "showDate" : showDate,
+					    "showTime" : showTime,
+					    "seatType" : seatType,				    
+					};
+				
+				console.log(ticket);				
+				let url = "BookedTicketsServlet";
+				axios.post(url,ticket).then(res=>{
+					console.log("Success");
+					let data = res.data;
+					console.log(data);
+					return data;
+				}).catch(err=>{
+					console.log("Error");
+					let data = err.response.data;
+					console.log(data);	
+					
+				});
+				
+			}
+			
+			
 						
 		</script>
 

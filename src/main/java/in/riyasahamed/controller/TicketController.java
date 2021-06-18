@@ -1,6 +1,7 @@
 package in.riyasahamed.controller;
 
 import java.time.LocalTime;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.riyasahamed.dao.TicketDTORepository;
-import in.riyasahamed.dto.BookedTicketsDTO;
 import in.riyasahamed.dto.TicketDTO;
 import in.riyasahamed.service.MovieService;
 import in.riyasahamed.service.TicketService;
@@ -32,7 +32,7 @@ public class TicketController {
 	}
 	
 	@PostMapping("/BookedTicketsServlet")
-	public Iterable<BookedTicketsDTO> test2(@RequestBody TicketDTO ticketDTO) {
+	public Map<Integer, Integer> test2(@RequestBody TicketDTO ticketDTO) {
 		return ticketService.getBookedTickets(ticketDTO.getShowDate(), ticketDTO.getShowTime(), ticketDTO.getSeatType());
 	}
 	
