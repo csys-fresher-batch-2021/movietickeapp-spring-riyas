@@ -9,9 +9,11 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Table(value="booking_details")
+@ToString
 public class TicketDTO {
 	
 	@Id

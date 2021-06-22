@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,4 +75,11 @@ public class UserController {
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("/FindUserId")
+	public Integer findUserId(@Param("userName") String userName) {
+		return userService.findByUserName(userName);
+	}
+	
+	
 }

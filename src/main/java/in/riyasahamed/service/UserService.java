@@ -21,10 +21,10 @@ public class UserService {
 
 	@Autowired
 	UserValidator validator;
-	
+
 	@Autowired
 	LoginValidator loginValidator;
-	
+
 	@Autowired
 	AdminRepository adminRepo;
 
@@ -42,23 +42,27 @@ public class UserService {
 		}
 
 	}
-	
-	public void userLogin(String userName ,String password) {		
-		 try {
+
+	public void userLogin(String userName, String password) {
+		try {
 			Optional<User> user = userRepo.findByUserNameAndPassWord(userName, password);
-			 loginValidator.isUserExists(user);
+			loginValidator.isUserExists(user);
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
-	public void  adminLogin(String userName ,String password) {		
-		 try {
+
+	public void adminLogin(String userName, String password) {
+		try {
 			Optional<Admin> admin = adminRepo.findByUserNameAndPassWord(userName, password);
-			 loginValidator.isValidAdmin(admin);
+			loginValidator.isValidAdmin(admin);
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage());
 		}
+	}
+
+	public Integer findByUserName(String userName) {
+		return  userRepo.findByUserName(userName);
 	}
 
 }

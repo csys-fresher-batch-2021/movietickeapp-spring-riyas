@@ -61,7 +61,7 @@ if(role == null){
  <%}  else {%>
 				<li class="nav-item"><a class="nav-link" href="#">Welcome 
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a>
+				<li class="nav-item"><a class="nav-link" href="LogoutServlet" onclick="logout()">Logout</a>
 				</li>
    <%} %>
  <% if (loggedInUsername != null && ! role.equalsIgnoreCase("ADMIN")){ %>
@@ -79,3 +79,14 @@ if(role == null){
 		</div>
 	</nav>
 </header>
+
+<script>
+
+function logout(){
+	
+	localStorage.clear();
+	sessionStorage.clear();
+}
+
+
+</script>
