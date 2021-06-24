@@ -105,15 +105,16 @@
 				let role = localStorage.getItem("role");
 				console.log(role);
 				content+="<br/><table class='table table-bordered'>";
-				content+="<thead><tr><th>S.No</th><th>Movie Name</th><th>Actor Name</th><th>Screen</th><th>Available Tickets</th></tr></thead>";
+				content+="<thead><tr><th>S.No</th><th>Movie Name</th><th>Actor Name</th><th>Screen</th><th>Available Tickets</th><th>Book</th></tr></thead>";
 				content+="<tbody id='movie-detail-tbody'>";
 				for(let movie of movies){
 					
-					console.log(movie);
+					if(movie.status == "ACTIVE"){
 					content+="<tr><td>"+ ++i + "</td><td>" + movie.name  + "</td><td>" + movie.actor + "</td><td>"+ movie.screen + "</td><td id='ticket-available' data-movie-id=" + movie.id + ">Loading</td>";
 					let obj = JSON.stringify(movie);
 					content+="<td><button class = 'btn btn-primary' onclick='book("+obj+")'>Book</button</td></tr>"
-				}
+					}
+					}
 				content+="</tbody></table>";
 				document.querySelector("#movie").innerHTML= content;
 				getBookedTickets();
@@ -175,7 +176,6 @@
 						ticketAvailableMap[movieId]= ticketsAvailable;
 						td.innerHTML =ticketsAvailable;  
 						});
-					alert("OK");
 					localStorage.setItem("TICKETS_AVAILABLE", JSON.stringify(ticketAvailableMap));
 				}).
 				catch(err =>{

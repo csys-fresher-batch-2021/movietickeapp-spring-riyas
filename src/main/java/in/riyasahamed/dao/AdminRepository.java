@@ -5,9 +5,11 @@ import java.util.Optional;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import in.riyasahamed.model.Admin;
 
+@Repository
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
 	
 

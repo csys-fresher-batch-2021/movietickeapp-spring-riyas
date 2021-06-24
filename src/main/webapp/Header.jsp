@@ -66,13 +66,13 @@ if(role == null){
    <%} %>
  <% if (loggedInUsername != null && ! role.equalsIgnoreCase("ADMIN")){ %>
 				<li class="nav-item"><a class="nav-link"
-					href=#>My Bookings</a></li>
+					href="UserBookings.jsp">My Bookings</a></li>
 
  <%} %>
      <% if (loggedInUsername != null && role.equalsIgnoreCase("ADMIN")){ %>
 				<li class="nav-item"><a class="nav-link" href="AddMovie.jsp">Add
 						Movie</a></li>
-				<li class="nav-item"><a class="nav-link" href=#>Booking
+				<li class="nav-item"><a class="nav-link" href="AllBookings.jsp">Booking
 						Details</a></li>
 			</ul>
  <%} %>

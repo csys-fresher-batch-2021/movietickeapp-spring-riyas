@@ -1,6 +1,7 @@
 package in.riyasahamed.controller;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.riyasahamed.dao.TicketDTORepository;
 import in.riyasahamed.dto.TicketDTO;
+import in.riyasahamed.model.Ticket;
 import in.riyasahamed.service.MovieService;
 import in.riyasahamed.service.TicketService;
 import in.riyasahamed.service.UserService;
@@ -24,41 +26,44 @@ import in.riyasahamed.util.Message;
 
 @RestController
 public class TicketController {
-	
+
 	@Autowired
 	MovieService movieService;
-	
+
 	@Autowired
 	TicketService ticketService;
-	
+
 	@Autowired
 	TicketDTORepository ticketRepo;
-	
+
 	@Autowired
 	UserService userService;
 	
+	
+
 	@GetMapping("/ShowTimesServlet")
 	public Iterable<LocalTime> getAllShowtimes() {
-		 	return movieService.getAllShowTimes();
+		return movieService.getAllShowTimes();
 	}
 	
+	@GetMapping("GetAllBookings")
+	public List<Ticket> getAllBookings(){
+		return ticketService.getAllBookings();
+	}
+
 	@PostMapping("/BookedTicketsServlet")
 	public Map<Integer, Integer> getBookedTickets(@RequestBody TicketDTO ticketDTO) {
-		return ticketService.getBookedTickets(ticketDTO.getShowDate(), ticketDTO.getShowTime(), ticketDTO.getSeatType());
+		return ticketService.getBookedTickets(ticketDTO.getShowDate(), ticketDTO.getShowTime(),
+				ticketDTO.getSeatType());
 	}
-	
-	@GetMapping("/GetBookings")
-	public Iterable<TicketDTO> getAllBookings() {
-		return ticketRepo.findAll();
-	}
-	
+
 	@GetMapping("/GetPriceServlet")
-	public float getPrice(@Param("tickets") Integer tickets , @Param("seatType") String seatType) {
+	public float getPrice(@Param("tickets") Integer tickets, @Param("seatType") String seatType) {
 		return ticketService.getPrice(seatType, tickets);
 	}
-	
+
 	@PostMapping("/BookMovieServlet")
-	public ResponseEntity<Message> bookMovie(@RequestBody TicketDTO ticketDTO , HttpServletRequest request) {
+	public ResponseEntity<Message> bookMovie(@RequestBody TicketDTO ticketDTO, HttpServletRequest request) {
 		try {
 			HttpSession session = request.getSession();
 			String userName = (String) session.getAttribute("LOGGED_IN_USER");
@@ -67,7 +72,7 @@ public class TicketController {
 			ticketService.bookMovie(ticketDTO);
 			Message message = new Message();
 			message.setInfoMessage("Successfully Booked Movie");
-			return new ResponseEntity<>( message, HttpStatus.OK);
+			return new ResponseEntity<>(message, HttpStatus.OK);
 		} catch (Exception e) {
 			Message message = new Message();
 			message.setErrorMessage(e.getMessage());
@@ -75,6 +80,11 @@ public class TicketController {
 		}
 	}
 	
-	
+	@GetMapping("/userBookings")
+	public List<Ticket> getUserBookings(HttpServletRequest request) {		
+			HttpSession session = request.getSession();
+			String userName = (String) session.getAttribute("LOGGED_IN_USER");
+			Integer userId = userService.findByUserName(userName);
+			return ticketService.getUserBookings(userId);		
+	}
 }
-

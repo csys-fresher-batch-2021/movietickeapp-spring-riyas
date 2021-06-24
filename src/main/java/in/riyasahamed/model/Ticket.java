@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 public class Ticket {
-	
-	private Integer ticketId;
+
+	private Integer id;
 
 	private LocalDateTime bookingDate;
 
@@ -18,17 +18,17 @@ public class Ticket {
 	private float totalPrice;
 
 	private LocalDate showDate;
-	
+
 	private Movie movie;
-	
+
 	private Seat seat;
-	
+
 	private User user;
-	
+
 	private String screen;
-	
+
 	private LocalTime showTime;
-	
+
 	private String status;
 
 }

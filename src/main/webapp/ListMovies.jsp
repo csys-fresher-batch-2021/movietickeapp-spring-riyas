@@ -19,7 +19,6 @@
 					<th id="movieName">Movie Name</th>
 					<th id="actor">Actor Name</th>
 					<th id="screen">Screen</th>
-					<th id="action">Action</th>
 				</tr>
 			</thead>
 			<tbody id="movie">
@@ -34,15 +33,19 @@
 				let content="";				
 				let i = 0;
 				let role = localStorage.getItem("role");
-				console.log(role);
 				for(let movie of movies){
-					content+="<tr><td>"+ ++i + "</td><td>" + movie.name  + "</td><td>" + movie.actor + "</td><td>"+ movie.screen + "</td>";
+					
 					if(role == "ADMIN"){
+						content+="<tr><td>"+ ++i + "</td><td>" + movie.name  + "</td><td>" + movie.actor + "</td><td>"+ movie.screen + "</td>";
 					if(movie.status == "ACTIVE"){
 					content+="<td><button class = 'btn btn-danger' onclick=\"remove("+movie.id + "," + "'" +movie.screen +"')\">Remove</button</td></tr>"; 
 				}else{
 					content+="<td><button class = 'btn btn-primary' onclick=\"activate("+movie.id + "," + "'" +movie.name +"')\">Activate</button</td></tr>";
 				}
+				}else{
+					if(movie.status == "ACTIVE"){
+						content+="<tr><td>"+ ++i + "</td><td>" + movie.name  + "</td><td>" + movie.actor + "</td><td>"+ movie.screen + "</td>";
+					}
 				}
 				}
 				document.querySelector("#movie").innerHTML= content;
@@ -72,17 +75,11 @@
 				}
 				
 			function activate(id,name){
-				alert("function calls");
 				localStorage.setItem("name",name);
 				localStorage.setItem("id",id);
 				window.location.href="ActivateMovie.jsp";
-				}
-			
-				
-				
-				
-			
-			getAllMovies();
+				}		
+getAllMovies();
 		</script>
 	</main>
 </body>
