@@ -113,11 +113,15 @@
 				content+="<td>" + data[i].user.mobileNumber + "</td><td>" + data[i].movie.id + "</td>";
 				content+="<td>" + data[i].movie.name + "</td><td>" + data[i].bookingDate + "</td>";
 				content+="<td>" + data[i].showDate + "</td><td>" + data[i].showTime + "</td>";
+				console.log(typeof data[i].showDate);
+				let date = new Date();
+				let today = date.toJSON().substring(0, 10);
 				content+="<td>" + data[i].screen + "</td><td>" + data[i].seat.seatType + "</td>";
 				content+="<td>" + data[i].noOfTickets + "</td><td>" + data[i].totalPrice + "</td>";
 				content+="<td>" + data[i].status + "</td>";
+				if(data[i].showDate > today && data[i].status == "BOOKED"){
 				content+="<td><button class = 'btn btn-danger' onclick=\"cancel("+data[i].id +")\">Cancel</button</td></tr>";
-			}}else{
+				}}}else{
 				content+="<tr><td colspan=14 class='text-center'>" + "No Records Found" + "</td></tr>"; 
 			}
 			document.querySelector("#bookings").innerHTML= content;
