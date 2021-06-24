@@ -10,6 +10,7 @@
 	<jsp:include page="Header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>My Bookings</h3>
+		<p id="message"></p>
 		<form>
 			<br> <input type="date" id="date" name="date"
 				onchange="filterDetails()"> <input type="text" id="movie"
@@ -41,6 +42,7 @@
 					<th id="tickets">Number of Tickets</th>
 					<th id="price">Total Price</th>
 					<th id="status">Status</th>
+					<th id="action">Cancel</th>
 				</tr>
 			</thead>
 			<tbody id="bookings">
@@ -113,12 +115,36 @@
 				content+="<td>" + data[i].showDate + "</td><td>" + data[i].showTime + "</td>";
 				content+="<td>" + data[i].screen + "</td><td>" + data[i].seat.seatType + "</td>";
 				content+="<td>" + data[i].noOfTickets + "</td><td>" + data[i].totalPrice + "</td>";
-				content+="<td>" + data[i].status + "</td></tr>";
+				content+="<td>" + data[i].status + "</td>";
+				content+="<td><button class = 'btn btn-danger' onclick=\"cancel("+data[i].id +")\">Cancel</button</td></tr>";
 			}}else{
 				content+="<tr><td colspan=14 class='text-center'>" + "No Records Found" + "</td></tr>"; 
 			}
 			document.querySelector("#bookings").innerHTML= content;
-			}		
+			}
+		
+		function cancel(id){
+			event.preventDefault();
+			const queryParams = "?id="+id;
+			let url = "cancel" + queryParams ;	
+			console.log(url);
+			content="";
+			fetch(url).then(res=> res.json()).then(res=>{
+				console.log("Success");
+				let data = res;
+				console.log(data);
+				content+=data.infoMessage;
+				alert(content);
+				window.location.href = "UserBookings.jsp";
+			}).catch(err=>{
+				console.log("Error");
+				let data = err.response;
+				console.log(data);	
+				content+=data.errorMessage;
+				document.querySelector("#message").innerHTML= content;
+				
+			});
+		}
 		
 </script>
 

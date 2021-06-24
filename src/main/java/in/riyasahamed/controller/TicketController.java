@@ -87,4 +87,32 @@ public class TicketController {
 			Integer userId = userService.findByUserName(userName);
 			return ticketService.getUserBookings(userId);		
 	}
+	
+	@GetMapping("cancel")
+	public ResponseEntity<Message> cancelBooking(@Param("id") Integer id ) {
+		try {
+			ticketService.cancelBooking(id);
+			Message message = new Message();
+			message.setInfoMessage("Successfully Cancelled Booking");
+			return new ResponseEntity<>( message, HttpStatus.OK);
+		} catch (Exception e) {
+			Message message = new Message();
+			message.setErrorMessage(e.getMessage());
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("update")
+	public ResponseEntity<Message> updateBookings() {
+		try {
+			ticketService.updateBookings();
+			Message message = new Message();
+			message.setInfoMessage("Successfully Updated Bookings");
+			return new ResponseEntity<>( message, HttpStatus.OK);
+		} catch (Exception e) {
+			Message message = new Message();
+			message.setErrorMessage(e.getMessage());
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

@@ -89,11 +89,35 @@ public class TicketService {
 		try {
 			tickets = ticket.findByUserId(userId);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ServiceException("Unable to Get Booking Details");
 		}
 
 		return tickets;
 	}
 
+	public void cancelBooking(Integer id) {
+		try {
+			ticket.remove(id);
+		} catch (Exception e) {
+			throw new ServiceException("Unable to Cancel Movie");
+		}
+
+	}
+
+	public void updateBookings() {
+		List<TicketDTO> tickets = (List<TicketDTO>) ticketRepo.findAll();
+		for (TicketDTO ticketDTO : tickets) {
+			if (ticketDTO.getStatus().equalsIgnoreCase("BOOKED")) {
+				if (ticketDTO.getShowDate().equals(LocalDate.now())) {
+					if (ticketDTO.getShowTime().isBefore(LocalTime.now())) {
+						ticketDTO.setStatus("FINISHED");
+						ticketRepo.save(ticketDTO);
+					}
+				} else if (ticketDTO.getShowDate().isBefore(LocalDate.now())) {
+					ticketDTO.setStatus("FINISHED");
+					ticketRepo.save(ticketDTO);
+				}
+			}
+		}
+	}
 }

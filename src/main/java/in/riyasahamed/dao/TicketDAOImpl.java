@@ -41,6 +41,12 @@ public class TicketDAOImpl {
 			return toRow(rs);
 		}, params);
 	}
+	
+	public void remove(Integer id) {
+		String sql = "update booking_details set status = 'CANCELLED' where id = ?";
+		Object[] params = { id };
+		jdbcTemplate.update(sql, params);
+	}
 
 	private Ticket toRow(ResultSet result) throws SQLException {
 		Ticket ticket = new Ticket();
