@@ -10,7 +10,11 @@ public class NameValidator {
 	private NameValidator() {
 		// Default Constructor
 	}
-
+	
+	/**
+	 * This Method Checks the Name Whether it is Valid or Not
+	 * @param name
+	 */
 	public static void isValidName(String name) {
 		if (name == null || name.trim().equals("")) {
 			throw new ValidationException("Name Cannot be Null");

@@ -12,6 +12,10 @@ public class SeatService {
 	@Autowired
 	SeatRepository seatRepo;
 	
+	/**
+	 * This Method is Used to get all the seat types. 
+	 * @return
+	 */
 	public Iterable<Seat> findAll() {		
 		return seatRepo.findAll();
 	}

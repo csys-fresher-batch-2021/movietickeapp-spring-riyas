@@ -22,7 +22,11 @@ public class UserValidator {
 	
 	@Autowired
 	UserValidator validator;
-
+	
+	/**
+	 * This Method Validates the User Details
+	 * @param user
+	 */
 	public void isValidUser(User user) {
 
 		try {
@@ -36,7 +40,11 @@ public class UserValidator {
 			throw new ValidationException(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * This Method checks whether the existing user is trying to register again
+	 * @param user
+	 */
 	public  void isSameUser(User user) {
 		
 		Iterable<User> allUsers = userService.getAllUsers();

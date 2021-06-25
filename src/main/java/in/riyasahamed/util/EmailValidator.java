@@ -10,7 +10,11 @@ public class EmailValidator {
 	private EmailValidator() {
 		//Default Constructor
 	}
-
+	
+	/**
+	 * This Method Checks the Email Whether it is Valid or Not
+	 * @param email
+	 */
 	public static void isValidEmail(String email) {
 
 		if (email == null || email.trim().equals("")) {

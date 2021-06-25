@@ -28,7 +28,7 @@ public class MovieService {
 	/**
 	 * This Method returns all the Active Screens
 	 * @param status
-	 * @return
+	 * @return Inactive Screen Lists
 	 */
 	public Iterable<String> getInActiveScreens(String status) {		
 		return movieRepo.getInActiveScreens(status);
@@ -36,7 +36,7 @@ public class MovieService {
 	
 	/**
 	 * This Method returns all the Movies
-	 * @return
+	 * @return List of All Movies
 	 */
 	public Iterable<Movie> getAllMovies() {		
 		return movieRepo.findAll();
@@ -58,6 +58,11 @@ public class MovieService {
 	
 	}
 	
+	/**
+	 * This Method is used to update the Movie Status.
+	 * @param id
+	 * @param status
+	 */
 	public void updateMovieStatus(Integer id , String status) {		
 		try {
 			 movieRepo.updateMovieStatus(id ,status);
@@ -67,6 +72,11 @@ public class MovieService {
 		
 	}
 	
+	/**
+	 * This Method is used to update the screen status after addition or removal of movie from screens
+	 * @param screen
+	 * @param status
+	 */
 	public void updateScreenStatus(String screen , String status) {		
 		try {
 			 screenRepo.updateScreenStatus(screen , status);
@@ -76,6 +86,11 @@ public class MovieService {
 		
 	}
 	
+	/**
+	 * This Method is used to update the screen status after addition or removal of movies.
+	 * @param id
+	 * @param screen
+	 */
 	public void updateScreenName(Integer id , String screen) {
 		try {
 			 movieRepo.updateScreenName(id, screen);
@@ -85,6 +100,10 @@ public class MovieService {
 		
 	}
 	
+	/**
+	 * This Method is used to get all the show times.
+	 * @return List of all show times.
+	 */
 	public Iterable<LocalTime> getAllShowTimes() {
 		return screenRepo.getAllShowTimes();
 	}

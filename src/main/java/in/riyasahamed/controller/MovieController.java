@@ -19,17 +19,17 @@ public class MovieController {
 	@Autowired
 	MovieService movieService;
 	
-	@GetMapping("/ListMoviesServlet")
+	@GetMapping("movies")
 	public Iterable<Movie> list() {		
 		return movieService.getAllMovies();	
 	}	
 	
-	@GetMapping("/ListScreenServlet")
+	@GetMapping("screens")
 	public Iterable<String> listScreens() {		
 		return movieService.getInActiveScreens("INACTIVE");	
 	}	
 	
-	@PostMapping("/AddMovieServlet")
+	@PostMapping("save")
 	public ResponseEntity<Message> addMovie(@RequestBody Movie movie) {
 		try {
 			movieService.addMovie(movie);
@@ -43,7 +43,7 @@ public class MovieController {
 		}
 	}
 	
-	@GetMapping("/RemoveMovieServlet")
+	@GetMapping("remove")
 	public ResponseEntity<Message> removeMovie(@Param("id") Integer id , @Param("screen") String screen){
 		try {
 			movieService.updateMovieStatus(id, "INACTIVE");
@@ -58,7 +58,7 @@ public class MovieController {
 		}
 	}
 	
-	@GetMapping("/ActivateMovieServlet")
+	@GetMapping("activate")
 	public ResponseEntity<Message> activateMovie(@Param("id") Integer id , @Param("screen") String screen){
 		try {
 			movieService.updateMovieStatus(id, "ACTIVE");

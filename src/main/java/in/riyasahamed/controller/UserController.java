@@ -4,10 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,12 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/GetAllUsersServlet")
-	public Iterable<User> findAll() {
-		return userService.getAllUsers();		
-	}
-	
-	@PostMapping("/RegisterUserServlet")
+	@PostMapping("register")
 	public ResponseEntity<Message> addUser(@RequestBody User user) {
 		try {
 			userService.addUser(user);
@@ -42,7 +35,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/UserLoginServlet")
+	@PostMapping("userLogin")
 	public ResponseEntity<Message> userLogin(@RequestBody User user , HttpServletRequest request){
 		try {
 			HttpSession session = request.getSession();
@@ -58,7 +51,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/AdminLoginServlet")
+	@PostMapping("adminLogin")
 	public ResponseEntity<Message> adminLogin(@RequestBody Admin admin , HttpServletRequest request){
 		try {
 			
@@ -75,11 +68,5 @@ public class UserController {
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@GetMapping("/FindUserId")
-	public Integer findUserId(@Param("userName") String userName) {
-		return userService.findByUserName(userName);
-	}
-	
-	
+		
 }

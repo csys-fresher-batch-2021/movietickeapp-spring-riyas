@@ -14,7 +14,12 @@ public class MovieValidator {
 	@Autowired
 	MovieService service;
 
-	
+	/**
+	 * This Method validates the Movie Details
+	 * @param name
+	 * @param actor
+	 * @param rating
+	 */
 	public  void validateMovieDetails(String name, String actor, Float rating) {
 		
 		Iterable<Movie> movies = service.getAllMovies();

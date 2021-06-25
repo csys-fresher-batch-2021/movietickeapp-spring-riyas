@@ -41,28 +41,28 @@ public class TicketController {
 	
 	
 
-	@GetMapping("/ShowTimesServlet")
+	@GetMapping("showtimes")
 	public Iterable<LocalTime> getAllShowtimes() {
 		return movieService.getAllShowTimes();
 	}
 	
-	@GetMapping("GetAllBookings")
+	@GetMapping("bookings")
 	public List<Ticket> getAllBookings(){
 		return ticketService.getAllBookings();
 	}
 
-	@PostMapping("/BookedTicketsServlet")
+	@PostMapping("bookedTickets")
 	public Map<Integer, Integer> getBookedTickets(@RequestBody TicketDTO ticketDTO) {
 		return ticketService.getBookedTickets(ticketDTO.getShowDate(), ticketDTO.getShowTime(),
 				ticketDTO.getSeatType());
 	}
 
-	@GetMapping("/GetPriceServlet")
+	@GetMapping("price")
 	public float getPrice(@Param("tickets") Integer tickets, @Param("seatType") String seatType) {
 		return ticketService.getPrice(seatType, tickets);
 	}
 
-	@PostMapping("/BookMovieServlet")
+	@PostMapping("book")
 	public ResponseEntity<Message> bookMovie(@RequestBody TicketDTO ticketDTO, HttpServletRequest request) {
 		try {
 			HttpSession session = request.getSession();
@@ -80,7 +80,7 @@ public class TicketController {
 		}
 	}
 	
-	@GetMapping("/userBookings")
+	@GetMapping("userBookings")
 	public List<Ticket> getUserBookings(HttpServletRequest request) {		
 			HttpSession session = request.getSession();
 			String userName = (String) session.getAttribute("LOGGED_IN_USER");

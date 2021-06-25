@@ -12,7 +12,7 @@ public class SeatController {
 	@Autowired
 	SeatService seatService;
 	
-	@GetMapping("SeatDetailsServlet")
+	@GetMapping("seats")
 	public Iterable<Seat> findAll() {
 		 return seatService.findAll();		
 	}

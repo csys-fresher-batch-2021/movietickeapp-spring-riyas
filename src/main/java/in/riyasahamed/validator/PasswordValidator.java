@@ -9,7 +9,11 @@ public class PasswordValidator {
 	private PasswordValidator() {
 		// Default Constructor
 	}
-
+	
+	/**
+	 * This Method Checks the Password Whether it is Valid or Not
+	 * @param password
+	 */
 	public static void isValidPassword(String password) {
 
 		if (password == null || password.trim().equals("")) {

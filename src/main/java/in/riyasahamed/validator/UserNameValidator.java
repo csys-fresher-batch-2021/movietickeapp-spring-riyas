@@ -11,6 +11,10 @@ public class UserNameValidator {
 		// default Constructor
 	}
 
+	/**
+	 * This Method Checks the User name Whether it is Valid or Not
+	 * @param userName
+	 */
 	public static void isValidUserName(String userName) {
 		if (userName == null || userName.trim().equals("")) {
 			throw new ValidationException("User Name Cannot be Null");
