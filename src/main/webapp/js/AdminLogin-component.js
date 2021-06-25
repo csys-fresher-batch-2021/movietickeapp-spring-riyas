@@ -7,23 +7,23 @@
 			let admin={
 				    "userName" : userName,
 				    "password" : password					    
-				};
-			
+				};			
 			console.log(admin);				
 			let url = "adminLogin";
 			content="";
 			axios.post(url,admin).then(res=>{
 				let data = res.data;
 				console.log(data.infoMessage);
-				alert(data.infoMessage);
-				window.location.href="index.jsp";
+				toastr.success(data.infoMessage);
+				setTimeout(function() {
+				window.location.href = "index.jsp";
+					},1000);
 			}).catch(err=>{
 				console.log("Error");
 				let data = err.response.data;
 				console.log(data);	
 				content+=data.errorMessage;
-				document.querySelector("#message").innerHTML= content;
-				
+				toastr.error(content);				
 			});		
 	}
 	

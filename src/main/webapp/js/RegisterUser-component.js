@@ -20,7 +20,10 @@ function addUser(){
 		axios.post(url,user).then(res=>{
 			let data = res.data;
 			content+=data.infoMessage;
-			document.querySelector("#message").innerHTML= content;
+			toastr.success(data.infoMessage);
+				setTimeout(function() {
+				window.location.href = "UserLogin.jsp";
+					},1500);
 		}).catch(err=>{
 			let data = err.response.data;
 			content+=data.errorMessage;
