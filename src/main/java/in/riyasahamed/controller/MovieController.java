@@ -18,61 +18,43 @@ public class MovieController {
 
 	@Autowired
 	MovieService movieService;
-	
+
 	@GetMapping("movies")
-	public Iterable<Movie> list() {		
-		return movieService.getAllMovies();	
-	}	
-	
+	public Iterable<Movie> list() {
+		return movieService.getAllMovies();
+	}
+
 	@GetMapping("screens")
-	public Iterable<String> listScreens() {		
-		return movieService.getInActiveScreens("INACTIVE");	
-	}	
-	
+	public Iterable<String> listScreens() {
+		return movieService.getInActiveScreens("INACTIVE");
+	}
+
 	@PostMapping("save")
 	public ResponseEntity<Message> addMovie(@RequestBody Movie movie) {
-		try {
-			movieService.addMovie(movie);
-			Message message = new Message();
-			message.setInfoMessage("Successfully Added Movie");
-			return new ResponseEntity<>( message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+		movieService.addMovie(movie);
+		Message message = new Message();
+		message.setInfoMessage("Successfully Added Movie");
+		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("remove")
-	public ResponseEntity<Message> removeMovie(@Param("id") Integer id , @Param("screen") String screen){
-		try {
-			movieService.updateMovieStatus(id, "INACTIVE");
-			movieService.updateScreenStatus(screen, "INACTIVE");		
-			Message message = new Message();
-			message.setInfoMessage("Successfully Removed Movie");
-			return new ResponseEntity<>( message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Message> removeMovie(@Param("id") Integer id, @Param("screen") String screen) {
+		movieService.updateMovieStatus(id, "INACTIVE");
+		movieService.updateScreenStatus(screen, "INACTIVE");
+		Message message = new Message();
+		message.setInfoMessage("Successfully Removed Movie");
+		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("activate")
-	public ResponseEntity<Message> activateMovie(@Param("id") Integer id , @Param("screen") String screen){
-		try {
-			movieService.updateMovieStatus(id, "ACTIVE");
-			movieService.updateScreenStatus(screen, "ACTIVE");	
-			movieService.updateScreenName(id, screen);
-			Message message = new Message();
-			message.setInfoMessage("Successfully Activated Movie");
-			return new ResponseEntity<>( message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Message> activateMovie(@Param("id") Integer id, @Param("screen") String screen) {
+		movieService.updateMovieStatus(id, "ACTIVE");
+		movieService.updateScreenStatus(screen, "ACTIVE");
+		movieService.updateScreenName(id, screen);
+		Message message = new Message();
+		message.setInfoMessage("Successfully Activated Movie");
+		return new ResponseEntity<>(message, HttpStatus.OK);
+
 	}
-	
-	
+
 }

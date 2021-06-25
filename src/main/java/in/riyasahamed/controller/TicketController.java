@@ -38,16 +38,14 @@ public class TicketController {
 
 	@Autowired
 	UserService userService;
-	
-	
 
 	@GetMapping("showtimes")
 	public Iterable<LocalTime> getAllShowtimes() {
 		return movieService.getAllShowTimes();
 	}
-	
+
 	@GetMapping("bookings")
-	public List<Ticket> getAllBookings(){
+	public List<Ticket> getAllBookings() {
 		return ticketService.getAllBookings();
 	}
 
@@ -64,55 +62,38 @@ public class TicketController {
 
 	@PostMapping("book")
 	public ResponseEntity<Message> bookMovie(@RequestBody TicketDTO ticketDTO, HttpServletRequest request) {
-		try {
-			HttpSession session = request.getSession();
-			String userName = (String) session.getAttribute("LOGGED_IN_USER");
-			Integer userId = userService.findByUserName(userName);
-			ticketDTO.setUserId(userId);
-			ticketService.bookMovie(ticketDTO);
-			Message message = new Message();
-			message.setInfoMessage("Successfully Booked Movie");
-			return new ResponseEntity<>(message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute("LOGGED_IN_USER");
+		Integer userId = userService.findByUserName(userName);
+		ticketDTO.setUserId(userId);
+		ticketService.bookMovie(ticketDTO);
+		Message message = new Message();
+		message.setInfoMessage("Successfully Booked Movie");
+		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("userBookings")
-	public List<Ticket> getUserBookings(HttpServletRequest request) {		
-			HttpSession session = request.getSession();
-			String userName = (String) session.getAttribute("LOGGED_IN_USER");
-			Integer userId = userService.findByUserName(userName);
-			return ticketService.getUserBookings(userId);		
+	public List<Ticket> getUserBookings(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute("LOGGED_IN_USER");
+		Integer userId = userService.findByUserName(userName);
+		return ticketService.getUserBookings(userId);
 	}
-	
+
 	@GetMapping("cancel")
-	public ResponseEntity<Message> cancelBooking(@Param("id") Integer id ) {
-		try {
-			ticketService.cancelBooking(id);
-			Message message = new Message();
-			message.setInfoMessage("Successfully Cancelled Booking");
-			return new ResponseEntity<>( message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Message> cancelBooking(@Param("id") Integer id) {
+		ticketService.cancelBooking(id);
+		Message message = new Message();
+		message.setInfoMessage("Successfully Cancelled Booking");
+		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("update")
 	public ResponseEntity<Message> updateBookings() {
-		try {
-			ticketService.updateBookings();
-			Message message = new Message();
-			message.setInfoMessage("Successfully Updated Bookings");
-			return new ResponseEntity<>( message, HttpStatus.OK);
-		} catch (Exception e) {
-			Message message = new Message();
-			message.setErrorMessage(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-		}
+		ticketService.updateBookings();
+		Message message = new Message();
+		message.setInfoMessage("Successfully Updated Bookings");
+		return new ResponseEntity<>(message, HttpStatus.OK);
+
 	}
 }
