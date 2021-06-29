@@ -27,7 +27,7 @@ public class TicketDAOImpl {
 
 	public List<Ticket> findAll() {
 
-		String sql = "select * from booking_details_vw";
+		String sql = "select * from booking_details_vw order by status asc";
 		return jdbcTemplate.query(sql, (rs, rowNo) -> {
 			return toRow(rs);
 		});
@@ -35,7 +35,7 @@ public class TicketDAOImpl {
 
 	public List<Ticket> findByUserId(Integer userId) {
 		
-		String sql = "select * from booking_details_vw where user_id = ?";
+		String sql = "select * from booking_details_vw where user_id = ? order by status asc";
 		Object[] params = { userId };
 		return jdbcTemplate.query(sql, (rs, rowNo) -> {
 			return toRow(rs);

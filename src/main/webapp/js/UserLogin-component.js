@@ -11,7 +11,6 @@
 			
 			console.log(user);				
 			let url = "userLogin";
-			content="";
 			axios.post(url,user).then(res=>{
 				let data = res.data;
 				console.log(data.infoMessage);
@@ -23,7 +22,6 @@
 				console.log("Error");
 				let data = err.response.data;
 				console.log(data);	
-				content+=data.errorMessage;
 				toastr.error(data.errorMessage);				
 			});		
 	}

@@ -52,6 +52,7 @@ function filterDetails(){
 		function displayDetails(data){				
 			let content="";		
 			let j=0;
+			let i;
 			if(data.length != 0){
 			 for(i = 0; i < data.length; i++){				 
 				content+="<tr><td>"+ ++j + "</td><td>" + data[i].id + "</td><td>" + data[i].user.name  + "</td>";

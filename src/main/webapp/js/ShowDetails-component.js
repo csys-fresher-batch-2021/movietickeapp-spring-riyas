@@ -21,10 +21,10 @@
 				let content="<br/>Show Time :" +"  ";	
 				for(let time of showTimes){
 					let showHour = parseInt(time.split(":")[0]);
-					let date = new Date();
-					let hour = date.getHours();
-					let today = date.toJSON().substring(0, 10);
-					if(today == date1){
+					let todayDate = new Date();
+					let hour = todayDate.getHours();
+					let todayStr = todayDate.toJSON().substring(0, 10);
+					if(todayStr == date1){
 					if(showHour > hour){
 
 						content+=
@@ -90,19 +90,20 @@
 				let showDate = document.querySelector("#showDate").value;
 				localStorage.setItem("DATE",showDate);
 				let showTimeOptions = document.querySelectorAll("#showTiming");
-				showTimeOptions.forEach(r=> {
+				let showTime;
+				showTimeOptions.forEach(r=> {				
 				if (r.checked){
 				  console.log(r.value);
-				  showTime = r.value;
+					 showTime = r.value;
 				   localStorage.setItem("TIME",showTime);
 				}
 				});	
-			
+				 let seatType;
 				let seatTypeOptions = document.querySelectorAll("#seatType");
 				seatTypeOptions.forEach(r=> {
 				if (r.checked){
 				  console.log(r.value);
-				  seatType = r.value;
+				 seatType = r.value;
 				  localStorage.setItem("SEAT",seatType);
 				}
 				});

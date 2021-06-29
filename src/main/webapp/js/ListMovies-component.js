@@ -28,7 +28,7 @@ function getAllMovies() {
 				const queryParams = "?id=" + id + "&screen=" + screen;
 				let url = "remove" + queryParams ;	
 				console.log(url);
-				content="";
+				let content="";
 				fetch(url).then(res=> res.json()).then(res=>{
 					console.log("Success");
 					let data = res;

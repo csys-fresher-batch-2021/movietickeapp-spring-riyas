@@ -67,7 +67,13 @@
 				content+="<td>" + data[i].screen + "</td><td>" + data[i].seat.seatType + "</td>";
 				content+="<td>" + data[i].noOfTickets + "</td><td>" + data[i].totalPrice + "</td>";
 				content+="<td>";
-				content+="<span class='badge badge-pill badge-success'>"; 
+				if(data[i].status == "BOOKED"){
+				content+="<span class='badge badge-success'>"; 
+				}else if(data[i].status == "CANCELLED"){
+				content+="<span class='badge  badge-danger'>";
+				}else if(data[i].status == "FINISHED"){
+				content+="<span class='badge badge-primary'>";	
+				}
 				content+= data[i].status + "</span></td>";
 				let date = new Date();
 				let today = date.toJSON().substring(0, 10);
@@ -84,7 +90,7 @@
 			const queryParams = "?id="+id;
 			let url = "cancel" + queryParams ;	
 			console.log(url);
-			content="";
+			let content="";
 			fetch(url).then(res=> res.json()).then(res=>{
 				console.log("Success");
 				let data = res;

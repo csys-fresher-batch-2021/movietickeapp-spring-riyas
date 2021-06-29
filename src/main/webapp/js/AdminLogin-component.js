@@ -10,7 +10,7 @@
 				};			
 			console.log(admin);				
 			let url = "adminLogin";
-			content="";
+			let content="";
 			axios.post(url,admin).then(res=>{
 				let data = res.data;
 				console.log(data.infoMessage);

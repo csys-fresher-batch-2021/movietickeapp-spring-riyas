@@ -8,7 +8,6 @@
 			fetch(url).then(res=> res.json()).then(res=>{
 			let screens=res;				
 			let content="";				
-			let i = 0;
 			content+= "<select name='screen' id='screen' required>";
 			content+="<option disabled selected>Select Screen</option>";				
 			for(let screen of screens){
@@ -28,7 +27,7 @@
 			const queryParams = "?id=" + id + "&screen=" + screen;
 			let url = "activate" + queryParams ;	
 			console.log(url);
-			content="";
+			let content="";
 			fetch(url).then(res=> res.json()).then(res=>{
 				let data = res;
 				content+=data.infoMessage;

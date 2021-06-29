@@ -3,7 +3,6 @@ function getAvailableScreens(){
 			fetch(url).then(res=> res.json()).then(res=>{
 			let screens=res;				
 			let content="";				
-			let i = 0;
 			content+= "<select name='screen' id='screen' required>";
 			content+="<option disabled selected>Select Screen</option>";				
 			for(let screen of screens){
@@ -32,7 +31,7 @@ function getAvailableScreens(){
 				
 				console.log(movie);				
 				let url = "save";
-				content="";
+				let content="";
 				axios.post(url,movie).then(res=>{
 					console.log("Success");
 					let data = res.data;
