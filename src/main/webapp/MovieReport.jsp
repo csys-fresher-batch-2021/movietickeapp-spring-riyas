@@ -2,12 +2,12 @@
 <%@page import="java.util.List"%>
 <html lang="en">
 <head>
-<title>Movies</title>
+<title>Movie Reports</title>
 </head>
 <body>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>All Movies</h3>
+		<h3>Booking Reports</h3>
 		<p id="message"></p>
 		<table class="table table-bordered">
 			<caption>This Table is for Showing All Movies</caption>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import in.riyasahamed.dto.MovieReportDTO;
 import in.riyasahamed.model.Movie;
 import in.riyasahamed.model.Seat;
 import in.riyasahamed.model.Ticket;
@@ -46,6 +47,32 @@ public class TicketDAOImpl {
 		String sql = "update booking_details set status = 'CANCELLED' where id = ?";
 		Object[] params = { id };
 		jdbcTemplate.update(sql, params);
+	}
+	
+	public List<MovieReportDTO> findReportsByMovieId(Integer movieId) {
+		
+		StringBuilder str = new StringBuilder();
+		str.append("SELECT showdate ,coalesce(morning,0) as morning, coalesce(afternoon,0) as afternoon,");
+		str.append("coalesce(evening,0) as evening,coalesce(midnight,0) as night");
+		str.append(" FROM crosstab('select showdate, show_time , sum(tickets) tickets  from booking_details");
+		str.append(" where movie_id=");
+		str.append(movieId);
+		str.append(" and status !=''CANCELLED'' GROUP BY showdate, show_time  order by 1,2 asc')");
+		str.append(" ct(showdate date, morning bigint, afternoon bigint, evening bigint , midnight bigint)");
+		String sql = str.toString();
+		System.out.println(sql);
+		
+		//String sql= "select * from report_vw";
+		return jdbcTemplate.query(sql, (rs, rowNo) -> {
+			MovieReportDTO report = new MovieReportDTO();
+			Date showDate = rs.getDate("showdate");
+			report.setShowDate(showDate.toLocalDate());
+			report.setAfterNoonShowTickets(rs.getInt("afternoon"));
+			report.setMorningShowTickets(rs.getInt("morning"));
+			report.setEveningShowTickets(rs.getInt("evening"));
+			report.setNightShowTickets(rs.getInt("night"));
+			return report;
+		});		
 	}
 
 	private Ticket toRow(ResultSet result) throws SQLException {
