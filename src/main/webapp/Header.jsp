@@ -29,7 +29,9 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">	
 <script src="assets/js/axios.min.js"></script>
 <%
 String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");

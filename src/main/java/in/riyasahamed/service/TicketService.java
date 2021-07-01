@@ -14,7 +14,6 @@ import in.riyasahamed.dao.SeatRepository;
 import in.riyasahamed.dao.TicketDAOImpl;
 import in.riyasahamed.dao.TicketDTORepository;
 import in.riyasahamed.dto.BookedTicketsDTO;
-import in.riyasahamed.dto.MovieReportDTO;
 import in.riyasahamed.dto.TicketDTO;
 import in.riyasahamed.exceptions.ServiceException;
 import in.riyasahamed.model.Seat;
@@ -153,9 +152,5 @@ public class TicketService {
 				}
 			}
 		}
-	}
-	
-	public List<MovieReportDTO> getMovieReport(Integer movieId) {		
-		return  ticket.findReportsByMovieId(movieId);
 	}
 }

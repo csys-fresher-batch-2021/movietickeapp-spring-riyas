@@ -6,24 +6,11 @@
 <head>
 <title>All Bookings</title>
 </head>
-<body onload="filterDetails()">
+<body>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Bookings by All Users</h3>
-		<form>
-			<br> <input type="date" id="date" name="date"
-				onchange="filterDetails()"> <input type="text" id="movie"
-				name="movie" oninput="filterDetails()" placeholder="Movie Name">
-			<select id="status" name="status" onchange="filterDetails()">
-				<option value="" selected>All</option>
-				<option value="BOOKED">Booked</option>
-				<option value="CANCELLED">Cancelled</option>
-				<option value="FINISHED">FINISHED</option>
-			</select>
-			<button type="reset" class="btn btn-primary" onclick="clearFilters()">Clear
-				Filters</button>
-		</form>
-		<table class="table table-bordered">
+		<table class="table table-bordered" id="bookingsTable">
 			<caption>This Table is for Showing Booking Details</caption>
 			<thead>
 				<tr>
@@ -43,11 +30,9 @@
 					<th id="status">Status</th>
 				</tr>
 			</thead>
-			<tbody id="bookings">
-
-			</tbody>
+			<tbody id="bookings"></tbody>
 		</table>
 	</main>
-	<script type="text/javascript"src="js/AllBookings-component.js"></script>
+	<script type="text/javascript"src="js/ListAllBookings.js"></script>
 </body>
 </html>

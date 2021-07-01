@@ -63,7 +63,10 @@ getShowDetails();
 				let data = res.data;
 				console.log(data);
 				content+=data.infoMessage;
-				alert(content);
+				toastr.success(data.infoMessage);
+				setTimeout(function() {
+				window.location.href = "UserBookings.jsp";
+					},1000);
 			}).catch(err=>{
 				console.log("Error");
 				let data = err.response.data;

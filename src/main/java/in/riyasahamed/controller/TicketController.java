@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.riyasahamed.dao.TicketDTORepository;
-import in.riyasahamed.dto.MovieReportDTO;
 import in.riyasahamed.dto.TicketDTO;
 import in.riyasahamed.model.Ticket;
 import in.riyasahamed.service.MovieService;
@@ -98,8 +97,4 @@ public class TicketController {
 
 	}
 	
-	@GetMapping("reports")
-	public List<MovieReportDTO> getReports(@Param("movieId") Integer movieId) {
-		return ticketService.getMovieReport(movieId);
-	}
 }
