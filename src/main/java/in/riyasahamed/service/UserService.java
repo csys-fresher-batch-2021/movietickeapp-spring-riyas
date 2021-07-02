@@ -27,6 +27,9 @@ public class UserService {
 
 	@Autowired
 	AdminRepository adminRepo;
+	
+	@Autowired
+	MailService mailService;
 
 	/**
 	 * This Method is used to get all user details
@@ -61,6 +64,8 @@ public class UserService {
 		try {
 			Optional<User> user = userRepo.findByUserNameAndPassWord(userName, password);
 			loginValidator.isUserExists(user);
+			User loggeInUser = userRepo.findUserByUserNameAndPassWord(userName, password);
+			mailService.sendLoginMail(loggeInUser);
 			valid = true;
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage());

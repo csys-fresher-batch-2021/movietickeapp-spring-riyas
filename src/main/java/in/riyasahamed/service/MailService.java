@@ -13,11 +13,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import in.riyasahamed.model.User;
+import in.riyasahamed.util.Mailutil;
+
 @Service
 public class MailService {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
 	public void sendMail(String body, String subject, String sendTo) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom("rakaskingdracula120@gmail.com");
@@ -37,5 +41,11 @@ public class MailService {
 		FileSystemResource resource = new FileSystemResource(new File(attachment));
 		mimeMessageHelper.addAttachment(resource.getFilename(), resource);
 		mailSender.send(message);
+	}
+	
+	public void sendLoginMail(User user) {
+		String body = Mailutil.loginMailBodyGenerator(user);
+		sendMail(body, "Login", user.getEmail());
+		System.out.println("Mail Service- Send Login Mail");
 	}
 }
