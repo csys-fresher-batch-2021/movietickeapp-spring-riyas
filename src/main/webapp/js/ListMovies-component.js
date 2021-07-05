@@ -9,8 +9,6 @@ function getAllMovies() {
 					
 					if(role == "ADMIN"){
 						content+="<tr><td>"+ ++i + "</td><td>" + movie.name  + "</td><td>" + movie.actor + "</td><td>"+ movie.screen + "</td>";
-						let obj = JSON.stringify(movie);
-						content+="<td><button class = 'btn btn-primary' onclick='getReport("+obj+")'>Report</button</td>"
 					if(movie.status == "ACTIVE"){
 					content+="<td><button class = 'btn btn-danger' onclick=\"remove("+movie.id + "," + "'" +movie.screen +"')\">Remove</button</td></tr>"; 
 				}else{
@@ -52,11 +50,6 @@ function getAllMovies() {
 				localStorage.setItem("name",name);
 				localStorage.setItem("id",id);
 				window.location.href="ActivateMovie.jsp";
-				}	
-			
-			function getReport(movie){
-				localStorage.setItem("MOVIE",JSON.stringify(movie));				
-				window.location.href = "MovieReport.jsp";
 				}	
 					
 getAllMovies();

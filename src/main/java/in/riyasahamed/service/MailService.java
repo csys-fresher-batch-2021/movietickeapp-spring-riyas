@@ -46,6 +46,7 @@ public class MailService {
 	public void sendLoginMail(User user) {
 		String body = Mailutil.loginMailBodyGenerator(user);
 		sendMail(body, "Login", user.getEmail());
+		System.out.println(user.getEmail());
 		System.out.println("Mail Service- Send Login Mail");
 	}
 }
