@@ -130,13 +130,14 @@
 				//Find tds
 					let tds = document.querySelectorAll("#ticket-available");
 					tds.forEach(td=>{
+						let tempTickets = ticketsAvailable;
 						let movieId = td.getAttribute("data-movie-id"); 
 						
 						let sum = ticketsMap.has(movieId)? ticketsMap.get(movieId): 0;
 						
-						ticketsAvailable = ticketsAvailable - sum;
-						ticketAvailableMap[movieId]= ticketsAvailable;
-						td.innerHTML =ticketsAvailable;  
+						tempTickets = ticketsAvailable - sum;
+						ticketAvailableMap[movieId]= tempTickets;
+						td.innerHTML =tempTickets;  
 						});
 					localStorage.setItem("TICKETS_AVAILABLE", JSON.stringify(ticketAvailableMap));
 				}).
