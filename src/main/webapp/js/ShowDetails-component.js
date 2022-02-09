@@ -134,7 +134,7 @@
 						let movieId = td.getAttribute("data-movie-id"); 
 						
 						let sum = ticketsMap.has(movieId)? ticketsMap.get(movieId): 0;
-						
+		 				
 						tempTickets = ticketsAvailable - sum;
 						ticketAvailableMap[movieId]= tempTickets;
 						td.innerHTML =tempTickets;  
